@@ -33,7 +33,7 @@ Base outlines automatically move with their owner base.
 
 ```javascript
 // move the owner base
-owner.setCenterPoint({ x: 518, y: 1071 });
+baseOutline.owner.setCenterPoint({ x: 518, y: 1071 });
 
 // follows automatically
 baseOutline.domNode.getAttribute('cx'); // "518"
