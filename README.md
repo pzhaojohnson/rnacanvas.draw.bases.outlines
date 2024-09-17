@@ -27,15 +27,19 @@ var owner = Nucleobase.create('G');
 var domNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
 var baseOutline = new BaseOutline(domNode, owner);
+
+// are publicly accessible
+baseOutline.domNode;
+baseOutline.owner;
 ```
 
 Base outlines automatically move with their owner base.
 
 ```javascript
 // move the owner base
-baseOutline.owner.setCenterPoint({ x: 518, y: 1071 });
+owner.setCenterPoint({ x: 518, y: 1071 });
 
 // follows automatically
-baseOutline.domNode.getAttribute('cx'); // "518"
-baseOutline.domNode.getAttribute('cy'); // "1071"
+domNode.getAttribute('cx'); // "518"
+domNode.getAttribute('cy'); // "1071"
 ```
