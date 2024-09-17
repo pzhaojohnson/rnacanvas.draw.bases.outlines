@@ -27,11 +27,15 @@ var owner = Nucleobase.create('G');
 var domNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
 var baseOutline = new BaseOutline(domNode, owner);
+```
 
+Base outlines automatically move with their owner base.
+
+```javascript
 // move the owner base
 owner.setCenterPoint({ x: 518, y: 1071 });
 
-// base outlines automatically move with their owner base
+// follows automatically
 baseOutline.domNode.getAttribute('cx'); // "518"
 baseOutline.domNode.getAttribute('cy'); // "1071"
 ```
