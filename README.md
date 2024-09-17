@@ -26,11 +26,11 @@ var owner = Nucleobase.create('G');
 // the DOM node that will correspond to the base outline
 var domNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
-var baseOutline = new BaseOutline(domNode, owner);
+var bo = new BaseOutline(domNode, owner);
 
 // are publicly accessible
-baseOutline.domNode;
-baseOutline.owner;
+bo.domNode;
+bo.owner;
 ```
 
 Base outlines automatically move with their owner base.
