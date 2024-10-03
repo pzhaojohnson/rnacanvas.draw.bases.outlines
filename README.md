@@ -69,12 +69,12 @@ interface Nucleobase {
 ### `constructor()`
 
 With the `BaseOutline` class constructor,
-the DOM node corresponding to the base outline
+the DOM node corresponding to a base outline
 and its owner base
 are explicitly specified.
 
-Currently, DOM nodes corresponding to base outlines
-can only be SVG circle elements,
+Currently, the DOM node corresponding to a base outline
+can only be an SVG circle element,
 but this type definition might get expanded in the future
 (e.g., to include SVG rect and polygon elements as well).
 
