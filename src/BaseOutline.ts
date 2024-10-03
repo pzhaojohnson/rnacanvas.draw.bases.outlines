@@ -60,6 +60,15 @@ export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
   setAttributes(attributes: { [name: string]: string }): void {
     setAttributes(this.domNode, attributes);
   }
+
+  /**
+   * Set values of the base outline.
+   */
+  set(values: Partial<BaseOutlineValues>): void {
+    if (values.attributes) {
+      this.setAttributes(values.attributes);
+    }
+  }
 }
 
 /**
@@ -68,3 +77,7 @@ export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
  * (e.g., to also include SVG rect elements).
  */
 type BaseOutlineDOMNode = SVGCircleElement;
+
+type BaseOutlineValues = {
+  attributes: { [name: string]: string },
+};

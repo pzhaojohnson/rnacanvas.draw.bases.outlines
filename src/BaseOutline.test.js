@@ -109,4 +109,16 @@ describe('`BaseOutline` class', () => {
     expect(bo.domNode.getAttribute('fill')).toBe('#abc654');
     expect(bo.domNode.getAttribute('fill-opacity')).toBe('0.16');
   });
+
+  test('`set()` method', () => {
+    let bo = BaseOutline.outlining(new NucleobaseMock());
+
+    bo.set({ attributes: { 'stroke': '#bc5590', 'fill-opacity': '0.81' } });
+
+    expect(bo.domNode.getAttribute('stroke')).toBe('#bc5590');
+    expect(bo.domNode.getAttribute('fill-opacity')).toBe('0.81');
+
+    // no attributes object
+    expect(() => bo.set({})).not.toThrow();
+  });
 });
