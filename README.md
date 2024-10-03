@@ -73,13 +73,13 @@ the DOM node corresponding to the base outline
 and its owner base
 are explicitly specified.
 
-Currently, the DOM node corresponding to a base outline
-can only be an SVG circle element,
-but this type definition might be expanded in the future
+Currently, DOM nodes corresponding to base outlines
+can only be SVG circle elements,
+but this type definition might get expanded in the future
 (e.g., to include SVG rect and polygon elements as well).
 
 The `BaseOutline` class constructor does not modify
-the input DOM node corresponding to the base outline in any way.
+the input DOM node corresponding to a base outline in any way.
 
 ```javascript
 // the base to outline
