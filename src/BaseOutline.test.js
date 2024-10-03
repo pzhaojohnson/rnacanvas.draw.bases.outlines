@@ -83,4 +83,20 @@ describe('`BaseOutline` class', () => {
 
     expect(bo.id).toBe('id-7389165891');
   });
+
+  test('`getAttribute()` method', () => {
+    let bo = BaseOutline.outlining(new NucleobaseMock());
+
+    bo.domNode.setAttribute('fill-opacity', '0.712731');
+
+    expect(bo.getAttribute('fill-opacity')).toBe('0.712731');
+  });
+
+  test('`setAttribute()` method', () => {
+    let bo = BaseOutline.outlining(new NucleobaseMock());
+
+    bo.setAttribute('stroke', '#12bd69');
+
+    expect(bo.domNode.getAttribute('stroke')).toBe('#12bd69');
+  });
 });

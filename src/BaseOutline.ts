@@ -37,6 +37,20 @@ export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
   get id() {
     return this.domNode.id;
   }
+
+  /**
+   * Get an attribute of the DOM node corresponding to the base outline.
+   */
+  getAttribute(name: string) {
+    return this.domNode.getAttribute(name);
+  }
+
+  /**
+   * Set an attribute of the DOM node corresponding to the base outline.
+   */
+  setAttribute(name: string, value: string): void {
+    this.domNode.setAttribute(name, value);
+  }
 }
 
 /**
