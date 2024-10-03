@@ -17,7 +17,41 @@ import { BaseOutline } from '@rnacanvas/draw.bases.outlines';
 
 ## `BaseOutline`
 
-The `BaseOutline` class can be used to outline bases.
+The `BaseOutline` class represents a base outline.
+
+### `outlining()`
+
+The `outlining()` static method creates and returns a new base outline
+outlining a specified base.
+
+```javascript
+// the base to outline
+var b = Nucleobase.create('G');
+
+var bo = BaseOutline.outlining(b);
+
+bo.owner === b; // true
+```
+
+Bases to be outlined must fulfill the following interface
+to be compatible with the `BaseOutline` class.
+
+```typescript
+interface Nucleobase {
+  readonly centerPoint: {
+    readonly x: number;
+    readonly y: number;
+
+    // the specified listener is to be called whenever the center point of the base moves
+    // (i.e., its X or Y coordinates change)
+    addEventListener(name: 'move', listener: () => void): void;
+
+    removeEventListener(name: 'move', listener: () => void): void;
+  }
+}
+```
+
+### `constructor()`
 
 ```javascript
 // the base to outline
