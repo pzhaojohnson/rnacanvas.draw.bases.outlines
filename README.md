@@ -96,3 +96,16 @@ var bo = new BaseOutline(domNode, owner);
 bo.domNode === circle; // true
 bo.owner === b; // true
 ```
+
+### `id`
+
+The ID of a base outline.
+
+This getter simply forwards the value of the `id` property
+of the DOM node corresponding to the base outline.
+
+```javascript
+bo.domNode.setAttribute('id', 'id-123456');
+
+bo.id; // "id-123456"
+```
