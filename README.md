@@ -85,7 +85,7 @@ the input DOM node corresponding to a base outline in any way.
 // the base to outline
 var b = Nucleobase.create('G');
 
-// the DOM node corresponding to the base outline
+// the DOM node that will correspond to the base outline
 var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
 var bo = new BaseOutline(domNode, owner);
