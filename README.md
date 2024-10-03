@@ -34,6 +34,9 @@ bo.owner === b; // true
 
 // the DOM node corresponding to the base outline
 bo.domNode; // an SVG circle element
+
+// a UUID will be assigned to the base outline
+bo.domNode.getAttribute('id').length >= 36; // true
 ```
 
 Base outlines automatically move with their owner base.
