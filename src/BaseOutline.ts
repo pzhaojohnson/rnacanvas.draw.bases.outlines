@@ -2,6 +2,8 @@ import { Nucleobase } from './Nucleobase';
 
 import { assignUUID } from '@rnacanvas/draw.svg';
 
+import { setAttributes } from '@rnacanvas/draw.svg';
+
 export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
   /**
    * Creates and returns a new base outline outlining the provided base.
@@ -50,6 +52,13 @@ export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
    */
   setAttribute(name: string, value: string): void {
     this.domNode.setAttribute(name, value);
+  }
+
+  /**
+   * Set multiple attributes of the DOM node corresponding to the base outline at once.
+   */
+  setAttributes(attributes: { [name: string]: string }): void {
+    setAttributes(this.domNode, attributes);
   }
 }
 
