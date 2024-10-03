@@ -102,7 +102,7 @@ bo.owner === b; // true
 The ID of a base outline.
 
 This getter simply forwards the value of the `id` property
-of the DOM node corresponding to the base outline.
+of the DOM node corresponding to a base outline.
 
 ```javascript
 bo.domNode.setAttribute('id', 'id-123456');
