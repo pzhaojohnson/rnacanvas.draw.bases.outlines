@@ -144,3 +144,17 @@ bo.setAttributes({
   'fill-opacity': '0.2',
 });
 ```
+
+### `set()`
+
+Set values of a base outline.
+
+```javascript
+bo.set({
+  attributes: {
+    'stroke': '#aaabbc',
+    'stroke-width': '2',
+    'fill': 'red',
+  },
+});
+```
