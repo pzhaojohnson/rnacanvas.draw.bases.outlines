@@ -109,3 +109,26 @@ bo.domNode.setAttribute('id', 'id-123456');
 
 bo.id; // "id-123456"
 ```
+
+### `getAttribute()`
+
+Get an attribute of the DOM node corresponding to a base outline.
+
+This method simply forwards the value returned by the `getAttribute()` method
+of the DOM node corresponding to a base outline.
+
+```javascript
+bo.domNode.setAttribute('fill-opacity', '0.57');
+
+bo.getAttribute('fill-opacity'); // "0.57"
+```
+
+### `setAttribute()`
+
+Set an attribute of the DOM node corresponding to a base outline.
+
+```javascript
+bo.setAttribute('stroke', '#abc123');
+
+bo.domNode.getAttribute('stroke'); // "#abc123"
+```
