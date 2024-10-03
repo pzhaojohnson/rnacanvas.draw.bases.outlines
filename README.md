@@ -69,6 +69,29 @@ interface Nucleobase {
 }
 ```
 
+### `static defaultValues`
+
+Default values for base outlines
+created using static methods such as the `outlining()` method.
+
+Note that the `BaseOutline` class constructor
+does not apply default values to constructed base outlines.
+
+```javascript
+// setting default values for base outlines
+// whose corresponding DOM nodes are SVG circle elements
+BaseOutline.defaultValues['circle'] = {
+  attributes: {
+    'r': '5.5',
+    'stroke': '#000000',
+    'stroke-width': '0',
+    'stroke-opacity': '1',
+    'fill': '#00ffff',
+    'fill-opacity': '1',
+  },
+};
+```
+
 ### `constructor()`
 
 With the `BaseOutline` class constructor,
