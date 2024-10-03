@@ -58,7 +58,7 @@ interface Nucleobase {
     readonly y: number;
 
     // the specified listener is to be called whenever the center point of the base moves
-    // (i.e., its X or Y coordinates change)
+    // (i.e., whenever its X or Y coordinates change)
     addEventListener(name: 'move', listener: () => void): void;
 
     removeEventListener(name: 'move', listener: () => void): void;
@@ -72,6 +72,14 @@ With the `BaseOutline` class constructor,
 the DOM node corresponding to the base outline
 and its owner base
 are explicitly specified.
+
+Currently, the DOM node corresponding to a base outline
+can only be an SVG circle element,
+but this type definition might be expanded in the future
+(e.g., to include SVG rect and polygon elements as well).
+
+The `BaseOutline` class constructor does not modify
+the input DOM node corresponding to the base outline in any way.
 
 ```javascript
 // the base to outline
