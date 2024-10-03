@@ -46,6 +46,20 @@ class NucleobaseMock {
 }
 
 describe('`BaseOutline` class', () => {
+  test('`outlining()` static method', () => {
+    let b = new NucleobaseMock();
+
+    b.centerPoint.x = 98.4;
+    b.centerPoint.y = -1002.34;
+
+    let bo = BaseOutline.outlining(b);
+
+    expect(bo.owner).toBe(b);
+
+    expect(bo.domNode.getAttribute('cx')).toBe('98.4');
+    expect(bo.domNode.getAttribute('cy')).toBe('-1002.34');
+  });
+
   it('moves with its owner nucleobase', () => {
     let domNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     let owner = new NucleobaseMock();
