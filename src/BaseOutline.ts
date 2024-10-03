@@ -5,6 +5,23 @@ import { assignUUID } from '@rnacanvas/draw.svg';
 import { setAttributes } from '@rnacanvas/draw.svg';
 
 export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
+  static defaultValues = {
+    /**
+     * Default values for base outlines whose corresponding DOM nodes
+     * are SVG circle elements.
+     */
+    'circle': {
+      attributes: {
+        'r': '5.5',
+        'stroke': '#000000',
+        'stroke-width': '0',
+        'stroke-opacity': '1',
+        'fill': '#00ffff',
+        'fill-opacity': '1',
+      },
+    },
+  };
+
   /**
    * Creates and returns a new base outline outlining the provided base.
    *
@@ -18,7 +35,11 @@ export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
     domNode.setAttribute('cx', `${b.centerPoint.x}`);
     domNode.setAttribute('cy', `${b.centerPoint.y}`);
 
-    return new BaseOutline(domNode, b);
+    let bo = new BaseOutline(domNode, b);
+
+    bo.set(BaseOutline.defaultValues['circle']);
+
+    return bo;
   }
 
   /**

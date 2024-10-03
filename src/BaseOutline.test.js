@@ -52,6 +52,9 @@ describe('`BaseOutline` class', () => {
     b.centerPoint.x = 98.4;
     b.centerPoint.y = -1002.34;
 
+    BaseOutline.defaultValues['circle'].attributes['stroke-width'] = '5.7';
+    BaseOutline.defaultValues['circle'].attributes['fill-opacity'] = '0.28';
+
     let bo = BaseOutline.outlining(b);
 
     expect(bo.owner).toBe(b);
@@ -59,8 +62,13 @@ describe('`BaseOutline` class', () => {
     // assigns a UUID to the base outline
     expect(bo.domNode.getAttribute('id').length).toBeGreaterThanOrEqual(36);
 
+    // positions the base outline
     expect(bo.domNode.getAttribute('cx')).toBe('98.4');
     expect(bo.domNode.getAttribute('cy')).toBe('-1002.34');
+
+    // applies default values
+    expect(bo.domNode.getAttribute('stroke-width')).toBe('5.7');
+    expect(bo.domNode.getAttribute('fill-opacity')).toBe('0.28');
   });
 
   it('moves with its owner nucleobase', () => {
