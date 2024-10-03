@@ -1,6 +1,6 @@
 import { Nucleobase } from './Nucleobase';
 
-export class BaseOutline<T extends SVGCircleElement, B extends Nucleobase> {
+export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
   /**
    * @param domNode The actual DOM node corresponding to the base outline.
    * @param owner The base that the base outline belongs to.
@@ -12,3 +12,10 @@ export class BaseOutline<T extends SVGCircleElement, B extends Nucleobase> {
     });
   }
 }
+
+/**
+ * For now, base outlines can only be SVG circle elements,
+ * but this type definition might get expanded in the future
+ * (e.g., to also include SVG rect elements).
+ */
+type BaseOutlineDOMNode = SVGCircleElement;
