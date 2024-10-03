@@ -56,6 +56,9 @@ describe('`BaseOutline` class', () => {
 
     expect(bo.owner).toBe(b);
 
+    // assigns a UUID to the base outline
+    expect(bo.domNode.getAttribute('id').length).toBeGreaterThanOrEqual(36);
+
     expect(bo.domNode.getAttribute('cx')).toBe('98.4');
     expect(bo.domNode.getAttribute('cy')).toBe('-1002.34');
   });

@@ -1,5 +1,7 @@
 import { Nucleobase } from './Nucleobase';
 
+import { assignUUID } from '@rnacanvas/draw.svg';
+
 export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
   /**
    * Creates and returns a new base outline outlining the provided base.
@@ -8,6 +10,8 @@ export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
    */
   static outlining<B extends Nucleobase>(b: B): BaseOutline<SVGCircleElement, B> {
     let domNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+
+    assignUUID(domNode);
 
     domNode.setAttribute('cx', `${b.centerPoint.x}`);
     domNode.setAttribute('cy', `${b.centerPoint.y}`);
