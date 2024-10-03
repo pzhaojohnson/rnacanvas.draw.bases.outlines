@@ -29,6 +29,14 @@ export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
       domNode.setAttribute('cy', `${owner.centerPoint.y}`);
     });
   }
+
+  /**
+   * Simply forwards the value of the `id` property
+   * of the DOM node corresponding to the base outline.
+   */
+  get id() {
+    return this.domNode.id;
+  }
 }
 
 /**

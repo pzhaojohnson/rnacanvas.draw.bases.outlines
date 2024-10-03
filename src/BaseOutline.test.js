@@ -75,4 +75,12 @@ describe('`BaseOutline` class', () => {
     owner.centerPoint.y = -812;
     expect(bo.domNode.getAttribute('cy')).toBe('-812');
   });
+
+  test('`id` getter', () => {
+    let bo = BaseOutline.outlining(new NucleobaseMock());
+
+    bo.domNode.setAttribute('id', 'id-7389165891');
+
+    expect(bo.id).toBe('id-7389165891');
+  });
 });
