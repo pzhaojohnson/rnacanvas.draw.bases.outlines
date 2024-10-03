@@ -19,7 +19,7 @@ import { BaseOutline } from '@rnacanvas/draw.bases.outlines';
 
 The `BaseOutline` class represents a base outline.
 
-### `outlining()`
+### `static outlining()`
 
 The `outlining()` static method creates and returns a new base outline
 outlining a specified base.
