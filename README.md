@@ -132,3 +132,15 @@ bo.setAttribute('stroke', '#abc123');
 
 bo.domNode.getAttribute('stroke'); // "#abc123"
 ```
+
+### `setAttributes()`
+
+Set multiple attributes of the DOM node corresponding to a base outline at once.
+
+```javascript
+bo.setAttributes({
+  'stroke': '#bc8193',
+  'stroke-opacity': '0.88',
+  'fill-opacity': '0.2',
+});
+```
