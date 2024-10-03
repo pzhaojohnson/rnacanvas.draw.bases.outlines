@@ -151,10 +151,6 @@ Set values of a base outline.
 
 ```javascript
 bo.set({
-  attributes: {
-    'stroke': '#aaabbc',
-    'stroke-width': '2',
-    'fill': 'red',
-  },
+  attributes: { 'stroke': '#aaabbc', 'stroke-width': '2', 'fill': 'red' },
 });
 ```
