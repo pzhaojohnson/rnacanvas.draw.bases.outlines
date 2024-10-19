@@ -210,7 +210,7 @@ Throws if unable to recreate a saved base outline.
 var parentDrawing; // an RNAcanvas drawing
 
 var owner = parentDrawing.addBase('C');
-var bo1 = parentDrawing.outline(owner);
+var bo1 = parentDrawing.outlineBase(owner);
 
 var bo2 = BaseOutline.deserialized(bo1.serialized(), parentDrawing);
 
