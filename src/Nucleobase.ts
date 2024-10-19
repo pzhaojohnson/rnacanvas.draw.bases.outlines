@@ -2,6 +2,8 @@
  * The nucleobase interface used by base outlines.
  */
 export interface Nucleobase {
+  readonly id: string;
+
   readonly centerPoint: {
     readonly x: number;
     readonly y: number;

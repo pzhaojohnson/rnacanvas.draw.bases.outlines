@@ -42,6 +42,8 @@ class Point {
 }
 
 class NucleobaseMock {
+  id = `${Math.random()}`;
+
   centerPoint = new Point();
 }
 
@@ -71,6 +73,33 @@ describe('`BaseOutline` class', () => {
     expect(bo.domNode.getAttribute('fill-opacity')).toBe('0.28');
   });
 
+  test('`static deserialized()`', () => {
+    let bo1 = BaseOutline.outlining(new NucleobaseMock());
+    bo1.domNode.id = 'id-873716728648726';
+    bo1.owner.id = 'id-754231325462';
+
+    let parentDrawing = new DrawingMock();
+
+    expect(parentDrawing.domNode.childNodes.length).toBeGreaterThanOrEqual(8);
+    parentDrawing.domNode.insertBefore(bo1.domNode, parentDrawing.domNode.childNodes[5]);
+
+    expect(parentDrawing.bases.length).toBeGreaterThanOrEqual(8);
+    parentDrawing.bases.splice(4, 0, bo1.owner);
+
+    // `SVGCircleElement` is not defined by JSDOM by default
+    expect(globalThis.SVGCircleElement).toBeFalsy();
+    globalThis.SVGCircleElement = SVGElement;
+
+    let bo2 = BaseOutline.deserialized(bo1.serialized(), parentDrawing);
+    expect(bo2.domNode).toBe(bo1.domNode);
+    expect(bo2.owner).toBe(bo1.owner);
+
+    // base outline IDs used to be saved under `circleId`
+    let bo3 = BaseOutline.deserialized({ circleId: 'id-873716728648726', ownerID: 'id-754231325462' }, parentDrawing);
+    expect(bo3.domNode).toBe(bo1.domNode);
+    expect(bo3.owner).toBe(bo1.owner);
+  });
+
   it('moves with its owner nucleobase', () => {
     let domNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     let owner = new NucleobaseMock();
@@ -82,6 +111,22 @@ describe('`BaseOutline` class', () => {
 
     owner.centerPoint.y = -812;
     expect(bo.domNode.getAttribute('cy')).toBe('-812');
+  });
+
+  test('`serialized()` method', () => {
+    let bo = BaseOutline.outlining(new NucleobaseMock());
+
+    bo.domNode.id = 'id-8987158957185';
+    bo.owner.id = 'id-174681274872';
+    expect(bo.serialized()).toStrictEqual({ id: 'id-8987158957185', ownerID: 'id-174681274872' });
+
+    bo.domNode.id = '';
+    bo.owner.id = 'id-174681274872';
+    expect(() => bo.serialized()).toThrow();
+
+    bo.domNode.id = 'id-8987158957185';
+    bo.owner.id = '';
+    expect(() => bo.serialized()).toThrow();
   });
 
   test('`id` getter', () => {
@@ -130,3 +175,33 @@ describe('`BaseOutline` class', () => {
     expect(() => bo.set({})).not.toThrow();
   });
 });
+
+class DrawingMock {
+  bases = [
+    new NucleobaseMock(),
+    new NucleobaseMock(),
+    new NucleobaseMock(),
+    new NucleobaseMock(),
+    new NucleobaseMock(),
+    new NucleobaseMock(),
+    new NucleobaseMock(),
+    new NucleobaseMock(),
+    new NucleobaseMock(),
+  ];
+
+  constructor() {
+    this.domNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+    this.domNode.append(document.createElementNS('http://www.w3.org/2000/svg', 'text'));
+    this.domNode.append(document.createElementNS('http://www.w3.org/2000/svg', 'text'));
+    this.domNode.append(document.createElementNS('http://www.w3.org/2000/svg', 'path'));
+    this.domNode.append(document.createElementNS('http://www.w3.org/2000/svg', 'text'));
+    this.domNode.append(document.createElementNS('http://www.w3.org/2000/svg', 'text'));
+    this.domNode.append(document.createElementNS('http://www.w3.org/2000/svg', 'circle'));
+    this.domNode.append(document.createElementNS('http://www.w3.org/2000/svg', 'text'));
+    this.domNode.append(document.createElementNS('http://www.w3.org/2000/svg', 'text'));
+    this.domNode.append(document.createElementNS('http://www.w3.org/2000/svg', 'ellipse'));
+    this.domNode.append(document.createElementNS('http://www.w3.org/2000/svg', 'rect'));
+    this.domNode.append(document.createElementNS('http://www.w3.org/2000/svg', 'text'));
+  }
+}

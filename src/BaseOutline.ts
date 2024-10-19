@@ -1,8 +1,14 @@
 import { Nucleobase } from './Nucleobase';
 
+import type { Drawing } from './Drawing';
+
 import { assignUUID } from '@rnacanvas/draw.svg';
 
 import { setAttributes } from '@rnacanvas/draw.svg';
+
+import { isNonNullObject } from '@rnacanvas/value-check';
+
+import { isString } from '@rnacanvas/value-check';
 
 export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
   static defaultValues = {
@@ -43,6 +49,36 @@ export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
   }
 
   /**
+   * Recreates a base outline from its serialized form.
+   *
+   * Throws if unable to do so.
+   *
+   * @param savedBaseOutline The serialized form of a saved base outline.
+   * @param parentDrawing The drawing that the saved base outline is in.
+   */
+  static deserialized<B extends Nucleobase>(savedBaseOutline: unknown, parentDrawing: Drawing<B>) {
+    if (!isNonNullObject(savedBaseOutline)) { throw new Error('Saved base outline must be an object.'); }
+
+    // base outline IDs used to be saved under `circleId`
+    let id = savedBaseOutline.id ?? savedBaseOutline.circleId;
+    if (!id) { throw new Error('Base outline ID is missing.'); }
+    if (!isString(id)) { throw new Error('Base outline ID must be a string.'); }
+
+    let domNode = parentDrawing.domNode.querySelector('#' + id);
+    if (!domNode) { throw new Error('Unable to find base outline DOM node.'); }
+    if (!(domNode instanceof SVGCircleElement)) { throw new Error('Base outline DOM node must be an SVG circle element.'); }
+
+    let ownerID = savedBaseOutline.ownerID;
+    if (!ownerID) { throw new Error('Missing base outline owner ID.'); }
+    if (!isString(ownerID)) { throw new Error('Base outline owner ID must be a string.'); }
+
+    let owner = [...parentDrawing.bases].find(b => b.id === ownerID);
+    if (!owner) { throw new Error('Unable to find base outline owner.'); }
+
+    return new BaseOutline(domNode, owner);
+  }
+
+  /**
    * @param domNode The actual DOM node corresponding to the base outline.
    * @param owner The base that the base outline belongs to.
    */
@@ -51,6 +87,22 @@ export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
       domNode.setAttribute('cx', `${owner.centerPoint.x}`);
       domNode.setAttribute('cy', `${owner.centerPoint.y}`);
     });
+  }
+
+  /**
+   * Returns the serialized form of the base outline,
+   * which is used when saving drawings.
+   *
+   * Throws if unable to do so.
+   */
+  serialized() {
+    let id = this.id;
+    if (!id) { throw new Error('Base outline ID is falsy.'); }
+
+    let ownerID = this.owner.id;
+    if (!ownerID) { throw new Error('Base outline owner ID is falsy.'); }
+
+    return { id, ownerID };
   }
 
   /**
