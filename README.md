@@ -177,3 +177,45 @@ bo.set({
   attributes: { 'stroke': '#aaabbc', 'stroke-width': '2', 'fill': 'red' },
 });
 ```
+
+### `serialized()`
+
+Returns the serialized form a base outline,
+which is used when saving drawings.
+
+Throws if a base outline cannot be serialized properly
+(e.g., it has a falsy ID).
+
+```javascript
+var owner = Nucleobase.create('G');
+owner.id; // "id-123456"
+
+var bo = BaseOutline.outlining(owner);
+bo.id; // "id-ABCDEF"
+
+bo.serialized(); // { id: "id-ABCDEF", ownerID: "id-123456" }
+```
+
+### `static deserialized()`
+
+Recreates a saved base outline from its serialized form.
+
+Note that this method does not create any new DOM nodes
+(it just retrieves the DOM node corresponding to a base outline
+from the parent drawing).
+
+Throws if unable to recreate a saved base outline.
+
+```javascript
+var parentDrawing; // an RNAcanvas drawing
+
+var owner = parentDrawing.addBase('C');
+var bo1 = parentDrawing.outline(owner);
+
+var bo2 = BaseOutline.deserialized(bo1.serialized(), parentDrawing);
+
+bo2.domNode === bo1.domNode; // true
+bo2.owner === bo1.owner; // true
+
+bo2 === bo1; // false
+```
