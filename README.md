@@ -180,7 +180,7 @@ bo.set({
 
 ### `serialized()`
 
-Returns the serialized form a base outline,
+Returns the serialized form of a base outline,
 which is used when saving drawings.
 
 Throws if a base outline cannot be serialized properly
@@ -201,7 +201,7 @@ bo.serialized(); // { id: "id-ABCDEF", ownerID: "id-123456" }
 Recreates a saved base outline from its serialized form.
 
 Note that this method does not create any new DOM nodes
-(it just retrieves the DOM node corresponding to a base outline
+(it just retrieves the DOM node and owner base for a saved base outline
 from the parent drawing).
 
 Throws if unable to recreate a saved base outline.
