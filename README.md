@@ -219,3 +219,28 @@ bo2.owner === bo1.owner; // true
 
 bo2 === bo1; // false
 ```
+
+### `static recreate()`
+
+(An alias for the `static deserialized()` method.)
+
+Recreates a saved outline from its serialized form
+(given the parent drawing that it's in).
+
+Throws if unable to do so.
+
+The DOM node and owner base of the saved outline must be present in the parent drawing.
+
+```javascript
+var parentDrawing; // an RNAcanvas drawing
+
+var owner = parentDrawing.addBase('C');
+var bo1 = parentDrawing.outlineBase(owner);
+
+var bo2 = BaseOutline.recreate(bo1.serialized(), parentDrawing);
+
+bo2.domNode === bo1.domNode; // true
+bo2.owner === bo1.owner; // true
+
+bo2 === bo1; // false
+```

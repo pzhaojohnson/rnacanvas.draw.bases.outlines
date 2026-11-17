@@ -79,6 +79,17 @@ export class BaseOutline<T extends BaseOutlineDOMNode, B extends Nucleobase> {
   }
 
   /**
+   * Recreates a saved outline from its serialized form.
+   * 
+   * Throws if unable to do so.
+   * 
+   * An alias for the `static deserialized` method.
+   */
+  static recreate<B extends Nucleobase>(savedBaseOutline: unknown, parentDrawing: Drawing<B>) {
+    return BaseOutline.deserialized(savedBaseOutline, parentDrawing);
+  }
+
+  /**
    * @param domNode The actual DOM node corresponding to the base outline.
    * @param owner The base that the base outline belongs to.
    */

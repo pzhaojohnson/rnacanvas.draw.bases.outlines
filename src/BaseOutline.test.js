@@ -47,6 +47,11 @@ class NucleobaseMock {
   centerPoint = new Point();
 }
 
+beforeAll(() => {
+  expect(globalThis.SVGCircleElement).toBeFalsy();
+  globalThis.SVGCircleElement = SVGElement;
+});
+
 describe('`BaseOutline` class', () => {
   test('`outlining()` static method', () => {
     let b = new NucleobaseMock();
@@ -86,10 +91,6 @@ describe('`BaseOutline` class', () => {
     expect(parentDrawing.bases.length).toBeGreaterThanOrEqual(8);
     parentDrawing.bases.splice(4, 0, bo1.owner);
 
-    // `SVGCircleElement` is not defined by JSDOM by default
-    expect(globalThis.SVGCircleElement).toBeFalsy();
-    globalThis.SVGCircleElement = SVGElement;
-
     let bo2 = BaseOutline.deserialized(bo1.serialized(), parentDrawing);
     expect(bo2.domNode).toBe(bo1.domNode);
     expect(bo2.owner).toBe(bo1.owner);
@@ -98,6 +99,24 @@ describe('`BaseOutline` class', () => {
     let bo3 = BaseOutline.deserialized({ circleId: 'id-873716728648726', ownerID: 'id-754231325462' }, parentDrawing);
     expect(bo3.domNode).toBe(bo1.domNode);
     expect(bo3.owner).toBe(bo1.owner);
+  });
+
+  test('`static recreate()`', () => {
+    let bo1 = BaseOutline.outlining(new NucleobaseMock());
+    bo1.domNode.id = 'id-98127361982736';
+    bo1.owner.id = 'id-61253412534';
+
+    let parentDrawing = new DrawingMock();
+
+    parentDrawing.domNode.insertBefore(bo1.domNode, parentDrawing.domNode.childNodes[3]);
+    parentDrawing.bases.splice(2, 0, bo1.owner);
+
+    let bo2 = BaseOutline.recreate(bo1.serialized(), parentDrawing);
+    expect(bo2.domNode).toBe(bo1.domNode);
+    expect(bo2.owner).toBe(bo1.owner);
+
+    // throws when unable to recreate
+    expect(() => BaseOutline.recreate(undefined, parentDrawing)).toThrow();
   });
 
   it('moves with its owner nucleobase', () => {
